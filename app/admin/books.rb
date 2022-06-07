@@ -14,5 +14,14 @@ ActiveAdmin.register Book do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+  index do
+    id_column
+    %i[title author].each {|col_name| column col_name }
+    column '著者（敬称あり）' do |book|
+      "#{book.author}さん"
+    end
+
+    actions
+  end
 end
