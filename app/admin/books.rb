@@ -1,4 +1,5 @@
 ActiveAdmin.register Book do
+  decorate_with BookDecorator
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -18,9 +19,7 @@ ActiveAdmin.register Book do
   index do
     id_column
     %i[title author].each {|col_name| column col_name }
-    column '著者（敬称あり）' do |book|
-      "#{book.author}さん"
-    end
+    column '著者（敬称あり）', &:author_name_with_honor
 
     actions
   end
